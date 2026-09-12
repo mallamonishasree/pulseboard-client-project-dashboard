@@ -12,6 +12,11 @@ function daysFromNow(days: number) {
 }
 
 async function main() {
+  if (await prisma.user.count()) {
+    console.log("Seed data already exists; skipping reset.");
+    return;
+  }
+
   await prisma.notification.deleteMany();
   await prisma.activity.deleteMany();
   await prisma.task.deleteMany();
