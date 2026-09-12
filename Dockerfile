@@ -8,4 +8,4 @@ RUN npm ci
 COPY . .
 RUN npx prisma generate && npm run build:client
 ENV NODE_ENV=production
-CMD ["npx", "tsx", "server/src/index.ts"]
+CMD ["sh", "-c", "npx prisma db push && npm run prisma:seed && npx tsx server/src/index.ts"]
